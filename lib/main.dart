@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:owl_app/components/button.dart';
 import 'package:owl_app/pages/entry_page.dart';
+import 'package:owl_app/pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.josefinSansTextTheme()
       ),
-      home: EntryPage(),
+      home: LoginPage(),
     );
   }
 }

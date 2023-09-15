@@ -12,16 +12,16 @@ class EntryPage extends StatelessWidget {
       body: Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-              Text(
-                  'Owl.',
+            children: <Widget>[
+              Text('Owl.',
                   style: TextStyle(
-                      fontSize: 60,
-                      color: Color.fromRGBO(95, 46, 14, 1.0)
-                  )
-              ),
+                      fontSize: 60, color: Color.fromRGBO(95, 46, 14, 1.0))),
               Image.asset('lib/images/owl.jpg'),
-              MyButton(text: 'get started', onTap: () {}),
+              MyButton(
+                text: 'get started',
+                padding: 80.0,
+                onTap: () {},
+              ),
               const SizedBox(height: 20),
               Text(
                 'login',
@@ -31,8 +31,7 @@ class EntryPage extends StatelessWidget {
                   color: const Color.fromRGBO(214, 99, 93, 1.0),
                 ),
               )
-            ]
-        ),
+            ]),
       ),
     );
   }
