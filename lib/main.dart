@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:owl_app/components/button.dart';
-import 'package:owl_app/pages/entry_page.dart';
-import 'package:owl_app/pages/login.dart';
+import 'package:owl_app/pages/auth_page.dart';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -21,7 +26,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         textTheme: GoogleFonts.josefinSansTextTheme()
       ),
-      home: LoginPage(),
+      home: const AuthPage(),
     );
   }
 }

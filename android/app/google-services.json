@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1005517361793",
+    "project_id": "owl-app-42265",
+    "storage_bucket": "owl-app-42265.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005517361793:android:c712f612bd81550cf53380",
+        "android_client_info": {
+          "package_name": "com.example.owl_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6HJQm9jB2LuSN1cWCD_KKHHK0WcHb6bU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

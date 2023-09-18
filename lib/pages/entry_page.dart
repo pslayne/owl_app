@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:owl_app/components/button.dart';
+import 'package:owl_app/pages/signup.dart';
+
+import 'login.dart';
 
 class EntryPage extends StatelessWidget {
   const EntryPage({super.key});
@@ -20,15 +22,29 @@ class EntryPage extends StatelessWidget {
               MyButton(
                 text: 'get started',
                 padding: 80.0,
-                onTap: () {},
+                onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignUpPage()),
+                    );
+                  },
               ),
               const SizedBox(height: 20),
-              Text(
-                'login',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: const Color.fromRGBO(214, 99, 93, 1.0),
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+                child: Text(
+                  'login',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromRGBO(214, 99, 93, 1.0),
+                    fontSize: 20,
+                  ),
                 ),
               )
             ]),
