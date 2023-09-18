@@ -22,6 +22,12 @@ class _LoginPageState extends State<LoginPage> {
     final passwordController = TextEditingController();
 
     void signUserIn() async {
+      showDialog(
+          context: context,
+          builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+          ),
+      );
       try {
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -33,6 +39,7 @@ class _LoginPageState extends State<LoginPage> {
           MaterialPageRoute(builder: (context) => Homepage()),
         );
       } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
         if (e.code == 'INVALID_LOGIN_CREDENTIALS') {
           setState(() {
             _visible = true;

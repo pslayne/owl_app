@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:owl_app/pages/entry_page.dart';
 
 class Homepage extends StatefulWidget {
   Homepage({super.key});
@@ -31,7 +32,25 @@ class _HomepageState extends State<Homepage> {
         ),
       ),
       body: Center(
-        child: const Text('You\'re in'),
+        child: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                const Text('You\'re in'),
+                GestureDetector(
+                  child: Icon(Icons.delete),
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const EntryPage()),
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
