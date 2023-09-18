@@ -57,6 +57,7 @@ class _HomepageState extends State<Homepage> {
         onTap: _onItemTapped,
         showSelectedLabels: false,
         showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
       ),
     );
   }
