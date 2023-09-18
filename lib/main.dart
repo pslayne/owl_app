@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         textTheme: GoogleFonts.josefinSansTextTheme()
       ),
       home: const AuthPage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
