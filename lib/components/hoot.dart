@@ -31,7 +31,7 @@ class _HootState extends State<Hoot> {
   @override
   void initState() {
     super.initState();
-    isLiked = widget.likes.contains(user.email);
+    isLiked = widget.likes.length > 0 ? widget.likes.contains(user.email) : false;
   }
 
   void toggleLike() {
