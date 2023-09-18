@@ -58,7 +58,6 @@ class _SignUpPageState extends State<SignUpPage> {
         );
       } on FirebaseAuthException catch(e) {
         Navigator.pop(context);
-        print(e);
         if(e.code == 'invalid-email') {
           setState(() {
             _visible = true;
@@ -106,18 +105,21 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: emailController,
                     hintText: '  email',
                     obscureText: false,
+                    padding: 50.0,
                   ),
                   const SizedBox(height: 10),
                   MyTextField(
                     controller: passwordController,
                     hintText: '  password',
                     obscureText: true,
+                    padding: 50.0,
                   ),
                   const SizedBox(height: 10),
                   MyTextField(
                     controller: confirmPasswordController,
                     hintText: '  confirm password',
                     obscureText: true,
+                    padding: 50.0,
                   ),
                   const SizedBox(height: 15),
                   MyButton(
