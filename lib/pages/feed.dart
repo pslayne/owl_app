@@ -32,6 +32,13 @@ class _FeedState extends State<Feed> {
   }
 
   void post() async {
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+
     Reference reference = FirebaseStorage.instance.ref(
         'uploads/profilePictures/${user.email}.jpg');
     String image = await reference.getDownloadURL();
@@ -49,6 +56,7 @@ class _FeedState extends State<Feed> {
       });
     }
 
+    Navigator.pop(context);
     setState(() {
       textController.clear();
       files.clear();
