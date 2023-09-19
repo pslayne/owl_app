@@ -117,6 +117,7 @@ class _ProfileState extends State<Profile> {
                             hootId: post.id,
                             likes: List<String>.from(post['Likes'] ?? []),
                             profilePicUrl: post['profilePicUrl'],
+                            images: List<String>.from(post['Images'] ?? []),
                           );
                         },
                       );

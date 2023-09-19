@@ -8,16 +8,23 @@ class StorageClient {
   final storage = firebase_storage.FirebaseStorage.instance;
 
   //send image to firebase
-  static Future<String?> uploadImageToFirebase(File imageFile, String email) async {
+  static Future<String> uploadImageToFirebase(File imageFile, String email, { profile = true }) async {
     try {
       String filePath = imageFile.path;
       File file = File(filePath);
 
       try {
         String? path;
-        String fileExtension = filePath.split('.').last;
+        String fileExtension = filePath
+            .split('.')
+            .last;
 
-        path = 'uploads/profilePictures/$email.$fileExtension';
+        if (profile) {
+          path = 'uploads/profilePictures/$email.$fileExtension';
+        } else {
+          String uniqueKey = UniqueKey().toString();
+          path = 'uploads/hootImages/$email-$uniqueKey.$fileExtension';
+        }
 
         firebase_storage.Reference reference =
         firebase_storage.FirebaseStorage.instance.ref(path);
@@ -39,6 +46,6 @@ class StorageClient {
       print('##################################################');
     }
 
-    return null;
+    return '';
   }
 }
