@@ -29,8 +29,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
       );
       try {
-        UserCredential userCredential =
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
@@ -80,18 +79,18 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 40),
                 MyTextField(
                   controller: emailController,
-                  hintText: '  email',
+                  hintText: 'email',
                   obscureText: false,
                   padding: 50.0,
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 5),
                 MyTextField(
                   controller: passwordController,
-                  hintText: '  password',
+                  hintText: 'password',
                   obscureText: true,
                   padding: 50.0,
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 10),
                 MyButton(
                   text: 'login',
                   padding: 130.0,

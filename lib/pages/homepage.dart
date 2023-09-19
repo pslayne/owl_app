@@ -33,36 +33,22 @@ class _HomepageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    final textController = TextEditingController();
-
-    void post() {
-
-      if(textController.text.isNotEmpty) {
-        FirebaseFirestore.instance.collection('User Posts').add({
-          'UserEmail': user.email,
-          'Message': textController.text,
-          'Timestamp': Timestamp.now(),
-          'Likes': [],
-        });
-      }
-
-      setState(() {
-        textController.clear();
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
-          'Owl',
-          style: TextStyle(
-            fontSize: 40,
-            color: Color.fromRGBO(95, 46, 14, 1.0),
-          ),
-        ),
+        leading: Image.asset('lib/images/owl_heart_nobg.png'),
         actions: [
-          Image.asset('lib/images/owl_heart_nobg.png'),
+          GestureDetector(
+            child: Icon(Icons.logout, color:  Color.fromRGBO(95, 46, 14, 0.8)),
+            onTap: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const EntryPage()),
+              );
+            },
+          ),
+          SizedBox(width: 4)
         ],
       ),
       body: list[_selectedIndex],

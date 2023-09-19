@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 
 import '../components/hoot.dart';
@@ -16,20 +17,25 @@ class _FeedState extends State<Feed> {
   final textController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser!;
 
-  void post() {
+  void post() async {
+    Reference reference = FirebaseStorage.instance.ref(
+        'uploads/profilePictures/${user.email}.jpg');
+    String image = await reference.getDownloadURL();
+
     if(textController.text.isNotEmpty) {
-      FirebaseFirestore.instance.collection('User Posts').add({
+      FirebaseFirestore.instance.collection('Hoots').add({
         'UserEmail': user.email,
         'Message': textController.text,
         'Timestamp': Timestamp.now(),
+        'profilePicUrl': image ?? '',
         'Likes': [],
       });
-  }
+    }
 
-  setState(() {
-    textController.clear();
-  });
-}
+    setState(() {
+      textController.clear();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +47,7 @@ class _FeedState extends State<Feed> {
                 child: StreamBuilder(
                   stream:
                   FirebaseFirestore.instance
-                      .collection("User Posts")
+                      .collection("Hoots")
                       .orderBy(
                     "Timestamp",
                     descending: true,
@@ -56,7 +62,8 @@ class _FeedState extends State<Feed> {
                               message: post['Message'],
                               user: post['UserEmail'],
                               hootId: post.id,
-                              likes: List<String>.from(post['Likes'] ?? [])
+                              likes: List<String>.from(post['Likes'] ?? []),
+                              profilePicUrl: post['profilePicUrl'],
                           );
                         },
                       );
@@ -70,7 +77,7 @@ class _FeedState extends State<Feed> {
                     );
                   },
                 )),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Row(
               children: [
                 Expanded(
@@ -85,7 +92,7 @@ class _FeedState extends State<Feed> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),

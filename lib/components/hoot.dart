@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:owl_app/components/like.dart';
 
@@ -8,7 +9,7 @@ class Hoot extends StatefulWidget {
   final String user;
   final String hootId;
   final List<String> likes;
- // final String time;
+  final String profilePicUrl;
 
   const Hoot({
     super.key,
@@ -16,8 +17,7 @@ class Hoot extends StatefulWidget {
     required this.user,
     required this.hootId,
     required this.likes,
-
-    //required this.time,
+    required this.profilePicUrl,
   });
 
   @override
@@ -31,15 +31,16 @@ class _HootState extends State<Hoot> {
   @override
   void initState() {
     super.initState();
-    isLiked = widget.likes.length > 0 ? widget.likes.contains(user.email) : false;
+    isLiked = widget.likes.isNotEmpty ? widget.likes.contains(user.email) : false;
   }
+
 
   void toggleLike() {
     setState(() {
       isLiked = !isLiked;
     });
 
-    DocumentReference postRef = FirebaseFirestore.instance.collection('User Posts').doc(widget.hootId);
+    DocumentReference postRef = FirebaseFirestore.instance.collection('Hoots').doc(widget.hootId);
 
     if(isLiked) {
       postRef.update({
@@ -51,6 +52,7 @@ class _HootState extends State<Hoot> {
       });
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,12 +70,19 @@ class _HootState extends State<Hoot> {
           children: [
             // profile pic
             Container(
+              width: 40.0,
+              height: 40.0,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                  color: Color.fromRGBO(95, 46, 14, 0.8)
+                borderRadius: BorderRadius.circular(60),
+                color: Color.fromRGBO(95, 46, 14, 1.0),
               ),
-              padding: EdgeInsets.all(10),
-              child: Icon(Icons.person, color: Colors.white,),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(60),
+                child: Image.network(
+                  widget.profilePicUrl,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             SizedBox(width: 15),
             // texto

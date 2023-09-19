@@ -36,7 +36,10 @@ class MyTextField extends StatelessWidget {
               hintText: hintText,
               hintStyle: const TextStyle(
                 color: Color.fromRGBO(95, 46, 14, 0.6),
-              )),
-        ));
+              ),
+              contentPadding: EdgeInsets.only(left: 20),
+          ),
+        ),
+    );
   }
 }
