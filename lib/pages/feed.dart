@@ -210,7 +210,6 @@ class _FeedState extends State<Feed> {
                 ],
               ),
             ),
-            const SizedBox(height: 10),
           ],
         ),
       ),
